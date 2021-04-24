@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "300237917202",
+    "project_id": "mob20-flutter-conclusao",
+    "storage_bucket": "mob20-flutter-conclusao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300237917202:android:ae38be4d3e045ae4fd5ccb",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_full"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300237917202-37ec2ubmebrkjq4r56gpfpppdn7eq8n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu7TyLkOfRa3PRdgMla2IeszFpRXLhIxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300237917202-37ec2ubmebrkjq4r56gpfpppdn7eq8n7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

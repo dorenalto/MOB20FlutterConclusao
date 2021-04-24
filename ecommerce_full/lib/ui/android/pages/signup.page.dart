@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:ecommerce_full/blocs/user.bloc.dart';
 import 'package:ecommerce_full/models/create-user.model.dart';
 import 'package:ecommerce_full/ui/shared/validators/custom.validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -134,6 +139,15 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               FlatButton(
+                onPressed: () => _tiraFoto(),
+                child: Text('Tirar foto',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+                ),
+                color: Theme.of(context).primaryColor,
+              ),
+              FlatButton(
                 onPressed: _isButtonEnabled
                     ? () {
                         final _isFormValid = _formKey.currentState.validate();
@@ -156,6 +170,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Future _create(BuildContext context, CreateUserModel user) async {
     _showAlertDialog(context);
+
     final UserBloc userBloc = Provider.of<UserBloc>(context, listen: false);
     final createdUser = await userBloc.create(user);
 
@@ -165,11 +180,11 @@ class _SignupPageState extends State<SignupPage> {
     if (createdUser != null) {
       Navigator.pop(context);
       final snackbar = SnackBar(content: Text('Bem-vindo! Autentique-se'));
-      _scaffoldKey.currentState.showSnackBar(snackbar);
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
     } else {
       final snackbar =
           SnackBar(content: Text('Não foi possível realizar seu cadastro'));
-      _scaffoldKey.currentState.showSnackBar(snackbar);
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
   }
 
@@ -211,4 +226,15 @@ class _SignupPageState extends State<SignupPage> {
   _hideAlertDialog(BuildContext context) {
     Navigator.pop(context);
   }
-}
+
+  Future<void> _tiraFoto() async {
+    File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    final Directory systemTempDir = Directory.systemTemp;
+
+    user.image = await FlutterImageCompress.compressAndGetFile(
+      img.absolute.path, '${systemTempDir.path}/${user.username}.jpeg',
+      quality: 80,
+    );
+    }
+  }
+

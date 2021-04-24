@@ -1,8 +1,11 @@
+import 'dart:io';
+
 class CreateUserModel {
   String name;
   String email;
   String username;
   String password;
+  File image;
 
   CreateUserModel({
     this.name,

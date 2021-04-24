@@ -37,6 +37,12 @@ class CartBloc extends ChangeNotifier {
     }
   }
 
+  clear(){
+    cart.clear();
+    calculateTotal();
+    notifyListeners();
+  }
+
   calculateTotal() {
     total = 0;
     cart.forEach((c) {

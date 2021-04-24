@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Usuário Inválido';
+                    return 'Usuário deve ser preenchido';
                   }
                   return null;
                 },
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Senha Inválida';
+                    return 'Senha deve ser preenchida';
                   }
                   return null;
                 },
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    _scaffoldKey.currentState.showSnackBar(snackbar);
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 
   _setButtonEnabled(bool isEnabled) {

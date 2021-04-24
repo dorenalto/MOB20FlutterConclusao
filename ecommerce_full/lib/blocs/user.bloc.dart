@@ -38,6 +38,7 @@ class UserBloc extends ChangeNotifier {
   }
 
   Future logout() async {
+    await accountRepository.logout();
     var prefs = await SharedPreferences.getInstance();
     user = null;
     await prefs.setString('user', null);

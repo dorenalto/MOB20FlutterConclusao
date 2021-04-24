@@ -1,4 +1,5 @@
 import 'package:ecommerce_full/blocs/user.bloc.dart';
+import 'package:ecommerce_full/blocs/cart.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,7 @@ class AuthenticatedUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserBloc _userBloc = Provider.of<UserBloc>(context, listen: false);
+    final CartBloc _cartBloc = Provider.of<CartBloc>(context, listen: false);
     return Container(
       child: Center(
         child: Column(
@@ -32,7 +34,10 @@ class AuthenticatedUser extends StatelessWidget {
             ),
             Text('Bem-vindo, ${_userBloc.user.name}'),
             FlatButton(
-              onPressed: _userBloc.logout,
+              onPressed: () {
+                _userBloc.logout();
+                _cartBloc.clear();
+                } ,
               child: Text('Sair'),
             ),
           ],

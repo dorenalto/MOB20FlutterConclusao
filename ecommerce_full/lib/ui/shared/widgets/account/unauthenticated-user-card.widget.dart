@@ -22,7 +22,11 @@ class UnautheticatedUserCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Autentique-se'),
+              child: Text('Autentique-se',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
             ),
             SizedBox(
               height: 10,
@@ -36,7 +40,11 @@ class UnautheticatedUserCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Ainda não sou cadastrado'),
+              child: Text('Ainda não sou cadastrado',
+                  style: TextStyle(
+                  decoration: TextDecoration.underline,
+              ),
+              ),
             ),
           ],
         ),
