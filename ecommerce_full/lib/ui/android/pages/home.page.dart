@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'Mais Vendidos',
+              homeBloc.selectedCategoryTitle,
               style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(

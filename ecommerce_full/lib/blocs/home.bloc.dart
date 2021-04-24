@@ -11,15 +11,17 @@ class HomeBloc extends ChangeNotifier {
   List<ProductListItemModel> products;
   List<CategoryListItemModel> categories;
   String selectedCategory = 'all';
+  String selectedCategoryTitle = 'all';
 
   HomeBloc() {
     getCategories();
-    getProducts();
+    //getProducts();
   }
 
   getCategories() {
     categoryRepository.getAll().then((data) {
       this.categories = data;
+      changeCategory(categories[0].title, categories[0].tag);
       notifyListeners();
     });
   }
@@ -38,8 +40,9 @@ class HomeBloc extends ChangeNotifier {
     });
   }
 
-  changeCategory(String tag) {
+  changeCategory(String title, String tag) {
     selectedCategory = tag;
+    selectedCategoryTitle = title;
     _clearProducts();
     getProductsByCategory();
   }

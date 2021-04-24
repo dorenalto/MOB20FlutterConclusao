@@ -18,6 +18,7 @@ class AccountRepository {
 
     var user;
 
+    //Obtem email e senha por meio do username
     await Firestore.instance.collection('users')
         .where('username', isEqualTo: model.username)
         .getDocuments().then((event) {
@@ -32,6 +33,7 @@ class AccountRepository {
         }
     }).catchError((erro) => print("Firebase error $erro"));
 
+    //Autentica o usuário caso tenha encontrado
     if(user != null) {
       try {
         AuthResult result =
@@ -53,6 +55,7 @@ class AccountRepository {
 
   Future<UserModel> create(CreateUserModel model) async {
 
+    //Verifica se o usernam já existe
     await Firestore.instance.collection('users')
         .where('username', isEqualTo: model.username)
         .getDocuments().then((event) {
@@ -61,6 +64,7 @@ class AccountRepository {
       }
     }).catchError((erro) => print("Firebase error $erro"));
 
+    //Cria novo usuário com autenticação por email e senha no Firebase
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: model.email, password: model.password);
@@ -80,6 +84,7 @@ class AccountRepository {
           image: imgUser
       );
 
+      //Salva o usuário criado no Firestore
       saveUser(user);
 
       return user;
@@ -108,6 +113,7 @@ class AccountRepository {
     }
   }
 
+  //Faz o upload da foto do usuário para o Storage
   static Future<String> uploadFirebaseStorage(File file) async {
     String fileName = path.basename(file.path);
     final storageRef = FirebaseStorage.instance.ref().child("userImages/$fileName");

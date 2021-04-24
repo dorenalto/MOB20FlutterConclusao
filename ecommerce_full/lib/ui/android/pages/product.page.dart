@@ -29,10 +29,10 @@ class ProductPage extends StatelessWidget {
               return Center(
                 child: Text('Não foi possível obter o produto.'),
               );
+            } else {
+              final ProductDetailsModel _productDetail = snapshot.data;
+              return _content(_productDetail);
             }
-
-            final ProductDetailsModel _productDetail = snapshot.data;
-            return _content(_productDetail);
         }
       },
     );
@@ -43,16 +43,41 @@ class ProductPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.title),
       ),
-      body: ListView.builder(
+      body:
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget> [
+          Container (
+            height: 300,
+       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: product.images.length,
         itemBuilder: (context, index) {
           final _imageUrl = product.images[index];
           return Container(
-            width: 200,
+            width: 300,
             child: Image.network(_imageUrl),
           );
         },
+      ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            flex: 1,
+            child:
+          Container(
+            margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Text(product.description,
+              style: TextStyle(height: 1, fontSize: 16),
+            ),
+          ) ,
+          ),
+          ),
+        ],
       ),
     );
   }

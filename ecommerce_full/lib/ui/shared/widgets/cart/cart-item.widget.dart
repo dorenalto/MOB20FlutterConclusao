@@ -38,7 +38,14 @@ class CartItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title),
+                SizedBox(
+                  width: 250,
+                  child:
+                Text(item.title,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                ),
+                ),
                 Text(
                   'R\$${_priceFormatter.format(item.price)}',
                   style: TextStyle(

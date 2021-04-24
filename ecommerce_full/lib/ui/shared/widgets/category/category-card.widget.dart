@@ -30,7 +30,7 @@ class CategoryCard extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         onPressed: () {
-          _homeBloc.changeCategory(category.tag);
+          _homeBloc.changeCategory(category.title, category.tag);
         },
       ),
     );
