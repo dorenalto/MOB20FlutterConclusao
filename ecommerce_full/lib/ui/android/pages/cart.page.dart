@@ -1,5 +1,7 @@
 import 'package:ecommerce_full/blocs/cart.bloc.dart';
+import 'package:ecommerce_full/blocs/user.bloc.dart';
 import 'package:ecommerce_full/models/cart-item.model.dart';
+import 'package:ecommerce_full/ui/android/pages/tabs.page.dart';
 import 'package:ecommerce_full/ui/shared/widgets/cart/cart-item.widget.dart';
 import 'package:ecommerce_full/ui/shared/widgets/shared/loader.widget.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +12,12 @@ class CartPage extends StatelessWidget {
   CartBloc cartBloc;
   final price = NumberFormat('#,##0.00', 'pt_BR');
   List<CartItemModel> items = List<CartItemModel>();
+  TabController controller;
 
   @override
   Widget build(BuildContext context) {
+    final UserBloc userBloc = Provider.of<UserBloc>(context);
+
     cartBloc = Provider.of<CartBloc>(context);
     items = cartBloc.cart;
 
@@ -36,7 +41,13 @@ class CartPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if(userBloc.user != null) {
+                        cartBloc.save(userBloc.user);
+                      } else {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => TabsPage(2)));
+                      }
+                    },
                     child: Text('Salvar Carrinho'),
                     color: Theme.of(context).primaryColor,
                   ),

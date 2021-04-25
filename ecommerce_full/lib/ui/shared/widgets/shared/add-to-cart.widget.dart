@@ -1,4 +1,5 @@
 import 'package:ecommerce_full/blocs/cart.bloc.dart';
+import 'package:ecommerce_full/blocs/user.bloc.dart';
 import 'package:ecommerce_full/models/cart-item.model.dart';
 import 'package:ecommerce_full/models/product-list-item.model.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class AddToCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartBloc _cartBloc = Provider.of<CartBloc>(context);
+
     var cartItem = CartItemModel(
       id: product.id,
       price: product.price,

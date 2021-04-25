@@ -6,10 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TabsPage extends StatelessWidget {
+  int selectedPage;
+  TabsPage(this.selectedPage);
+
   @override
   Widget build(BuildContext context) {
     final cartBloc = Provider.of<CartBloc>(context);
-    return Scaffold(
+
+    return DefaultTabController(
+        initialIndex:selectedPage,
+        length: 3,
+    child: Scaffold(
       body: TabBarView(
         children: [
           HomePage(),
@@ -64,6 +71,7 @@ class TabsPage extends StatelessWidget {
           indicatorColor: Theme.of(context).primaryColor,
         ),
       ),
+    ),
     );
   }
 }

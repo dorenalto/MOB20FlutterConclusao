@@ -1,7 +1,12 @@
 import 'package:ecommerce_full/models/cart-item.model.dart';
+import 'package:ecommerce_full/models/user.model.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_full/repositories/cart.repository.dart';
 
 class CartBloc extends ChangeNotifier {
+
+  final cartRepository = CartRepository();
+
   var cart = List<CartItemModel>();
   double total = 0;
 
@@ -52,7 +57,7 @@ class CartBloc extends ChangeNotifier {
     notifyListeners();
   }
 
-  save(){
-
+  save(UserModel user){
+    cartRepository.save(user.id, cart);
   }
 }
