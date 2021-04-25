@@ -1,10 +1,14 @@
 import 'package:ecommerce_full/blocs/cart.bloc.dart';
+import 'package:ecommerce_full/blocs/user.bloc.dart';
+import 'package:ecommerce_full/models/authenticate-user.model.dart';
 import 'package:ecommerce_full/models/cart-item.model.dart';
+import 'package:ecommerce_full/ui/android/pages/login.page.dart';
 import 'package:ecommerce_full/ui/shared/widgets/cart/cart-item.widget.dart';
 import 'package:ecommerce_full/ui/shared/widgets/shared/loader.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'card.page.dart';
 
 class CartPage extends StatelessWidget {
   CartBloc cartBloc;
@@ -15,6 +19,8 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     cartBloc = Provider.of<CartBloc>(context);
     items = cartBloc.cart;
+
+    final UserBloc userBloc = Provider.of<UserBloc>(context);
 
     return Scaffold(
       body: Container(
@@ -41,7 +47,19 @@ class CartPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (userBloc.user == null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CardPage()),
+                        );
+                      }
+                    },
                     child: Text('Checkout'),
                     color: Theme.of(context).primaryColor,
                   ),
