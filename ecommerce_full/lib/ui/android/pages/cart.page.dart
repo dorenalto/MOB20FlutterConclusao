@@ -12,7 +12,6 @@ class CartPage extends StatelessWidget {
   CartBloc cartBloc;
   final price = NumberFormat('#,##0.00', 'pt_BR');
   List<CartItemModel> items = List<CartItemModel>();
-  TabController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,19 @@ class CartPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (userBloc.user == null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CardPage()),
+                        );
+                      }
+                    },
                     child: Text('Checkout'),
                     color: Theme.of(context).primaryColor,
                   ),
