@@ -21,7 +21,7 @@ class UserBloc extends ChangeNotifier {
     var prefs = await SharedPreferences.getInstance();
     var userData = prefs.getString('user');
 
-    if (user != null) {
+    if (userData != null) {
       var json = jsonDecode(userData);
       user = UserModel.fromJson(json);
       Settings.user = user;

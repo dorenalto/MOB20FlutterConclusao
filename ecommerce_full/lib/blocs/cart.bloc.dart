@@ -51,4 +51,8 @@ class CartBloc extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  save(){
+
+  }
 }

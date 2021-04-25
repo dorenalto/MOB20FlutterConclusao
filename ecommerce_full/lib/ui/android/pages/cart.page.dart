@@ -35,11 +35,10 @@ class CartPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'R\$ ${price.format(cartBloc.total)}',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
+                  FlatButton(
+                    onPressed: () {},
+                    child: Text('Salvar Carrinho'),
+                    color: Theme.of(context).primaryColor,
                   ),
                   FlatButton(
                     onPressed: () {},
@@ -48,7 +47,22 @@ class CartPage extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            Container(
+              height: 80,
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'R\$ ${price.format(cartBloc.total)}',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
