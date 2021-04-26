@@ -15,20 +15,12 @@ class HomeBloc extends ChangeNotifier {
 
   HomeBloc() {
     getCategories();
-    //getProducts();
   }
 
   getCategories() {
     categoryRepository.getAll().then((data) {
       this.categories = data;
       changeCategory(categories[0].title, categories[0].tag);
-      notifyListeners();
-    });
-  }
-
-  getProducts() {
-    productRepository.getAll().then((data) {
-      this.products = data;
       notifyListeners();
     });
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AuthenticatedUser extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final UserBloc _userBloc = Provider.of<UserBloc>(context, listen: false);
@@ -37,7 +38,7 @@ class AuthenticatedUser extends StatelessWidget {
               onPressed: () {
                 _userBloc.logout();
                 _cartBloc.clear();
-                } ,
+              } ,
               child: Text('Sair'),
             ),
           ],

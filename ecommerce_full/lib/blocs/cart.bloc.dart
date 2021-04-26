@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:ecommerce_full/models/cart-item.model.dart';
 import 'package:ecommerce_full/models/user.model.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_full/repositories/cart.repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartBloc extends ChangeNotifier {
 
@@ -10,8 +13,30 @@ class CartBloc extends ChangeNotifier {
   var cart = List<CartItemModel>();
   double total = 0;
 
-  List<CartItemModel> get() {
-    return cart;
+  CartBloc(){
+    loadCart();
+  }
+
+  loadCart() {
+    SharedPreferences.getInstance().then((data) {
+
+      var userData = data.getString('user');
+
+      if (userData != null) {
+        var json = jsonDecode(userData);
+        UserModel user = UserModel.fromJson(json);
+        get(user);
+        notifyListeners();
+      }
+    });
+  }
+
+  get(UserModel user) {
+    cartRepository.get(user.id).then((data) {
+      this.cart = data;
+      calculateTotal();
+      notifyListeners();
+    });
   }
 
   add(CartItemModel item) {

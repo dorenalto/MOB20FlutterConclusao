@@ -5,14 +5,6 @@ import 'package:ecommerce_full/settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductRepository {
-  Future<List<ProductListItemModel>> getAll() async {
-    final url = '${Settings.apiUrl}products';
-
-    Response response = await Dio().get(url);
-    return (response.data as List)
-        .map((r) => ProductListItemModel.fromJson(r))
-        .toList();
-  }
 
   //Busca produtos por categoria
   Future<List<ProductListItemModel>> getByCategory(String category) async {

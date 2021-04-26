@@ -37,7 +37,6 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeBloc themeBloc = Provider.of<ThemeBloc>(context);
-
     // final tabBar = Platform.isIOS ? iOS.TabsPage() : android.TabsPage();
     final tabBar = android.TabsPage(0);
 

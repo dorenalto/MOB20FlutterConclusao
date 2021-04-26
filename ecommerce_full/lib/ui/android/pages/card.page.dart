@@ -27,11 +27,9 @@ class CardPageState extends State<CardPage> {
   @override
   Widget build(BuildContext context) {
     final ThemeBloc themeBloc = Provider.of<ThemeBloc>(context);
-    return MaterialApp(
-      title: 'Flutter Credit Card View Demo',
-      debugShowCheckedModeBanner: false,
-      theme: themeBloc.theme,
-      home: Scaffold(
+    return Scaffold(
+      appBar: AppBar(),
+      body: Scaffold(
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Column(

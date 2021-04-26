@@ -1,3 +1,4 @@
+import 'package:ecommerce_full/blocs/cart.bloc.dart';
 import 'package:ecommerce_full/blocs/user.bloc.dart';
 import 'package:ecommerce_full/models/authenticate-user.model.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
   Future _authenticate(BuildContext context) async {
     _showAlertDialog(context);
     final UserBloc userBloc = Provider.of<UserBloc>(context, listen: false);
+    final CartBloc cartBloc = Provider.of<CartBloc>(context, listen: false);
 
     var user = await userBloc.authenticate(AuthenticateModel(
       username: username,
@@ -121,6 +123,7 @@ class _LoginPageState extends State<LoginPage> {
     _hideAlertDialog(context);
 
     if (user != null) {
+      cartBloc.get(user);
       Navigator.pop(context);
       return;
     }

@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'card.page.dart';
+
 class CartPage extends StatelessWidget {
   CartBloc cartBloc;
   final price = NumberFormat('#,##0.00', 'pt_BR');
@@ -53,15 +55,9 @@ class CartPage extends StatelessWidget {
                   FlatButton(
                     onPressed: () {
                       if (userBloc.user == null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TabsPage(2)));
                       } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CardPage()),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => CardPage()));
                       }
                     },
                     child: Text('Checkout'),
