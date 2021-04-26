@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_full/models/cart-item.model.dart';
 import 'package:ecommerce_full/models/user.model.dart';
+import 'package:ecommerce_full/settings.dart';
 
 class CartRepository {
 
+  //Obtem os carrinho do usuário
   Future<List<CartItemModel>> get(String userId) async{
 
     var response =  <CartItemModel>[];
@@ -29,6 +31,7 @@ class CartRepository {
 
   }
 
+  //Grava o carrinho do usuário
   Future<void> save( String userId, List<CartItemModel> cart) async {
 
     cart.forEach((c) {
@@ -47,11 +50,19 @@ class CartRepository {
       }
     });
 
-
-
   }
 
-  Future<void> clear() async {
-
+  //Limap o carrinho do usuário
+  Future<void> clear(String userId) async {
+    try{
+      Firestore.instance.collection("users").document(userId)
+          .collection("cart").getDocuments().then((snapshot){
+        for (DocumentSnapshot ds in snapshot.documents) {
+          ds.reference.delete();
+        }
+      });
+    }catch(erro){
+      print("Firebase error $erro");
+    }
   }
 }
