@@ -33,13 +33,22 @@ class AuthenticatedUser extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Text('Bem-vindo, ${_userBloc.user.name}'),
+            Text('Bem-vindo, ${_userBloc.user.name}',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
             FlatButton(
               onPressed: () {
                 _userBloc.logout();
                 _cartBloc.clear();
               } ,
-              child: Text('Sair'),
+              child: Text('Sair',
+                style: TextStyle(
+                  fontSize: 20,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
             ),
           ],
         ),

@@ -1,5 +1,7 @@
 import 'package:ecommerce_full/blocs/theme.bloc.dart';
+import 'package:ecommerce_full/blocs/user.bloc.dart';
 import 'package:ecommerce_full/themes/dark-pink.theme.dart';
+import 'package:ecommerce_full/ui/android/pages/purchase.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card_brazilian/credit_card_form.dart';
 import 'package:flutter_credit_card_brazilian/credit_card_model.dart';
@@ -26,9 +28,12 @@ class CardPageState extends State<CardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeBloc themeBloc = Provider.of<ThemeBloc>(context);
+    final UserBloc userBloc = Provider.of<UserBloc>(context);
+    final CartBloc cartBloc = Provider.of<CartBloc>(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Pagamento"),
+      ),
       body: Scaffold(
         resizeToAvoidBottomInset: true,
         body: SafeArea(
@@ -53,7 +58,10 @@ class CardPageState extends State<CardPage> {
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  cartBloc.clearBase(userBloc.user);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PurchasePage()));
+                },
                 child: Text(
                   'Confirmar',
                 ),

@@ -139,10 +139,17 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               FlatButton(
-                onPressed: () => _tiraFoto(),
+                onPressed: () => _obterFoto(false),
+                child: Text('Escolher foto',
+                  style: TextStyle(
+                  ),
+                ),
+                color: Theme.of(context).primaryColor,
+              ),
+              FlatButton(
+                onPressed: () => _obterFoto(true),
                 child: Text('Tirar foto',
                 style: TextStyle(
-                  fontSize: 20,
                 ),
                 ),
                 color: Theme.of(context).primaryColor,
@@ -159,7 +166,11 @@ class _SignupPageState extends State<SignupPage> {
                         }
                       }
                     : null,
-                child: Text('Cadastrar'),
+                child: Text('Cadastrar',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
               ),
             ],
           ),
@@ -227,8 +238,14 @@ class _SignupPageState extends State<SignupPage> {
     Navigator.pop(context);
   }
 
-  Future<void> _tiraFoto() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.camera);
+  Future<void> _obterFoto(bool camera) async {
+    ImageSource source = ImageSource.gallery;
+
+    if(camera){
+      source = ImageSource.camera;
+    }
+
+    File img = await ImagePicker.pickImage(source: source);
     final Directory systemTempDir = Directory.systemTemp;
 
     user.image = await FlutterImageCompress.compressAndGetFile(

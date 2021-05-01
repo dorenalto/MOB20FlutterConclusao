@@ -24,6 +24,7 @@ class UnautheticatedUserCard extends StatelessWidget {
               },
               child: Text('Autentique-se',
                 style: TextStyle(
+                  fontSize: 20,
                   decoration: TextDecoration.underline,
                 ),
               ),
@@ -42,6 +43,7 @@ class UnautheticatedUserCard extends StatelessWidget {
               },
               child: Text('Ainda não sou cadastrado',
                   style: TextStyle(
+                    fontSize: 20,
                   decoration: TextDecoration.underline,
               ),
               ),

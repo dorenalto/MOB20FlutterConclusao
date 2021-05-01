@@ -85,4 +85,9 @@ class CartBloc extends ChangeNotifier {
   save(UserModel user){
     cartRepository.save(user.id, cart);
   }
+
+  clearBase(UserModel user){
+    cartRepository.clear(user.id);
+    clear();
+  }
 }
