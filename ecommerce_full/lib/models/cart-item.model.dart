@@ -13,14 +13,6 @@ class CartItemModel {
     this.image,
   });
 
-  CartItemModel.fromMap(Map<String, dynamic> data){
-    id = data['id'];
-    title = data['title'];
-    quantity = data['quantity'];
-    price = data['price'];
-    image = data['image'];
-  }
-
   CartItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];

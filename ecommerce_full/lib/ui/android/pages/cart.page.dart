@@ -57,10 +57,17 @@ class CartPage extends StatelessWidget {
                       if (userBloc.user == null) {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => TabsPage(2)));
                       } else {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CardPage()));
+                        if(items.length > 0)
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => CardPage()));
+                        else{
+                          final snackBar = SnackBar(
+                            content: Text('Carrinho não possui produtos!'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       }
                     },
-                    child: Text('Checkout'),
+                    child: Text('Comprar'),
                     color: Theme.of(context).primaryColor,
                   ),
                 ],

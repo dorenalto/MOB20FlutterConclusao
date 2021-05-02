@@ -33,7 +33,12 @@ class CartBloc extends ChangeNotifier {
 
   get(UserModel user) {
     cartRepository.get(user.id).then((data) {
-      this.cart = data;
+      data.forEach((element) {
+        CartItemModel item = cart.firstWhere((item) => item.id == element.id, orElse: () => null);
+
+        if(item == null)
+          add(element);
+      });
       calculateTotal();
       notifyListeners();
     });
